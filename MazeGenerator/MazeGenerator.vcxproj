@@ -126,6 +126,7 @@
     <ClCompile Include="src.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cell.h" />
     <ClInclude Include="cScreen.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Screens.h" />

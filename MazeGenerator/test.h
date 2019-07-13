@@ -14,7 +14,7 @@ class Test : public cScreen
 private:
 public:
 	Test();
-	virtual int Run(sf::RenderWindow &App);
+	virtual int Run(sf::RenderWindow &window);
 };
 
 //------------------------------------------------------------
@@ -23,24 +23,30 @@ public:
 
 Test::Test() {}
 
-int Test::Run(sf::RenderWindow &App)
+int Test::Run(sf::RenderWindow &window)
 {
 	bool Running = true;
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
+
 	while (Running)
 	{
 		sf::Event event;
-		while (App.pollEvent(event))
+		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				return -1;
 		}
 
-		App.clear();
-		App.draw(shape);
-		App.display();
+		window.clear();
+
+
+
+		window.draw(shape);
+
+
+		window.display();
 	}
 
 	//never reaches here

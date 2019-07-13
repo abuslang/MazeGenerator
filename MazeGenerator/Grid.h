@@ -12,6 +12,7 @@ public:
 	~Grid();
 private:
 	//The grid is gotta be drawable
+	void init();
 	virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 	
 };
