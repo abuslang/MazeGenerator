@@ -1,4 +1,5 @@
 /*
+	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
 
 	create a grid of n x m cells, and initialize all of them to be unconnected.
@@ -14,30 +15,22 @@
 */
 
 #include "SFML/Graphics.hpp"
-//#include "Grid.h"
+#include "Screens.h"
+#include "Grid.h"
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(1500, 1000), "Maze Generator!");
+	sf::RenderWindow window(sf::VideoMode(1500, 1000), "Maze Generator!");	//this window will be passed around from screen to screen
+	std::vector<cScreen*> Screens;											//vector of available screens, can switch from screen to screen by returning its index			
+	
+	int screen = 0;			//initital screen will be test screen, in an actual application, should be menu screen
+	Test testScreen;
+	Screens.push_back(&testScreen);
 
-
-	while (window.isOpen())
+	while (screen >= 0)
 	{
-		sf::Event event;
-		while (window.pollEvent(event))
-		{
-			switch(event.type)
-			{
-			case sf::Event::Closed:
-				window.close();
-				break;
-			};
-		}
-
-		window.clear();
-		//window.draw();
-		window.display();
+		screen = Screens[screen]->Run(window);
 	}
-
+	window.close();
 	return 0;
 }
