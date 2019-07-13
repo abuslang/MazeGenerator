@@ -1,7 +1,12 @@
 /*
+	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
+
 	create a grid of n x m cells, and initialize all of them to be unconnected.
-	prompt the user for a maze generation algorithm from a list. just implement 1 for now.
+	prompt the user for a maze generation routine from a list. just implement 1 for now.
 	prompt the user for a path finding routine that finds the path from entrance to exit.
+
+	each of these "routines" can be implemented as a screen, check the link above
+
 	pass the window into the chosen Maze Generating Routine, and have it update each frame.
 	after its finsished, prompt user to select entrance and exit for the maze.
 	then pass the window or grid in to the chosen pathfinding routine and have it update each frame.
