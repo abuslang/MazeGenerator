@@ -1,4 +1,5 @@
 /*
+	Contributors: Saad Bhatti, Abdus Quadri
 	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
 

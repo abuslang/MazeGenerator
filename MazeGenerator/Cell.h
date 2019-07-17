@@ -34,21 +34,21 @@ Cell::Cell(int row, int col, int s)
 	body.setFillColor(sf::Color::Blue);
 	body.setPosition(col * s, row * s);
 
-	top.setSize(sf::Vector2f(s, s / 5));
+	top.setSize(sf::Vector2f(s, s / 10));
 	top.setFillColor(sf::Color::Black);
 	top.setPosition(col * s, row * s);
 
-	bottom.setSize(sf::Vector2f(s, s / 5));
+	bottom.setSize(sf::Vector2f(s, s / 10));
 	bottom.setFillColor(sf::Color::Black);
-	bottom.setPosition(col * s, (row * s + s) - (s / 5));
+	bottom.setPosition(col * s, (row * s + s) - (s / 10));
 
-	left.setSize(sf::Vector2f(s / 5, s));
+	left.setSize(sf::Vector2f(s / 10, s));
 	left.setFillColor(sf::Color::Black);
 	left.setPosition(col * s, row * s);
 
-	right.setSize(sf::Vector2f(s / 5, s));
+	right.setSize(sf::Vector2f(s / 10, s));
 	right.setFillColor(sf::Color::Black);
-	right.setPosition((col * s + s) - (s/5), row * s );
+	right.setPosition((col * s + s) - (s/10), row * s );
 }//end constructor
 
 
