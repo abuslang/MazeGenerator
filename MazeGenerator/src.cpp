@@ -3,7 +3,9 @@
 	
 	Description: This program demonstrates various Maze generation and solution algorithms with
 				the use of the SFML library for visuals.
-	
+
+	DELETE THIS COMMENT LATER
+
 	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
 
