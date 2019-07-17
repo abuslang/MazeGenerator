@@ -10,10 +10,13 @@
 #pragma once
 #include "SFML/Graphics.hpp"
 
+class Grid;
+
 class cScreen
 {
 public:
-	virtual int Run(sf::RenderWindow &App) = 0;
+	virtual int Run(sf::RenderWindow &window) = 0;
+	virtual int Run(sf::RenderWindow &window, Grid &grid) { return 0; }
 };
 
 #endif CSCREEN_H

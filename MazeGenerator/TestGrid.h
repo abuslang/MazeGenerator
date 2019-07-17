@@ -1,33 +1,36 @@
-/*
-	This is a test screen i copied from the sfml website and changed it a bit.
-	it shows how this "screen" system will flow.
-*/
-
-#ifndef TEST_H
-#define TEST_H
+#ifndef TEST_GRID_H
+#define TEST_GRID_H
 #pragma once
 
 #include "cScreen.h"
+#include "Grid.h"
 
-class Test : public cScreen
+class TestGrid : public cScreen
 {
 private:
 public:
-	Test();
+	TestGrid();
+
 	int Run(sf::RenderWindow &window);
+	int Run(sf::RenderWindow &window, const Grid &grid);
 };
 
 //------------------------------------------------------------
 //TODO: move this stuff to a .cpp file later
 
-Test::Test() {}
+TestGrid::TestGrid()
+{
 
-int Test::Run(sf::RenderWindow &window)
+}
+
+int TestGrid::Run(sf::RenderWindow &window)
+{
+	return -1;
+}
+
+int TestGrid::Run(sf::RenderWindow &window, const Grid &grid)
 {
 	bool Running = true;
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
-
 
 	while (Running)
 	{
@@ -39,7 +42,7 @@ int Test::Run(sf::RenderWindow &window)
 		}
 
 		window.clear();
-		window.draw(shape);
+		window.draw(grid);
 		window.display();
 	}
 
@@ -47,7 +50,4 @@ int Test::Run(sf::RenderWindow &window)
 	return -1;
 }
 
-
-#endif // !TEST_H
-
-
+#endif

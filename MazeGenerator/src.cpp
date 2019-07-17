@@ -23,16 +23,25 @@ int main()
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Maze Generator!");	//this window will be passed around from screen to screen
 	std::vector<cScreen*> Screens;											//vector of available screens, can switch from screen to screen by returning its index			
 	
-	int screen = 0;			//initital screen will be test screen, in an actual application, should be menu screen
 	Test testScreen;
-	Screens.push_back(&testScreen);
-	int m =20;	//get these from user
+	TestGrid testGrid;
+
+	Screens.push_back(&testScreen);	//idx 0
+	Screens.push_back(&testGrid);	//idx 1
+
+	int screen = TEST_GRID_SCREEN;			//initital screen will be test screen, in an actual release application, should be menu screen
+
+	
+
+	int m = 20;				//get these from user
 	int n = 20;
+
+
 	Grid maze(m, n, 50);	//instantiate a 20 x 20 grid with Cell sizes of 50 x 50
 
 	while (screen >= 0)
 	{
-		screen = Screens[screen]->Run(window);
+		screen = Screens[screen]->Run(window, maze);
 	}
 	window.close();
 	return 0;
