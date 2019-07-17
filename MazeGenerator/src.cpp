@@ -1,5 +1,9 @@
 /*
 	Contributors: Saad Bhatti, Abdus Quadri
+	
+	Description: This program demonstrates various Maze generation and solution algorithms with
+				the use of the SFML library for visuals.
+	
 	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
 
