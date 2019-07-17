@@ -40,7 +40,7 @@ Grid::Grid(int m, int n, int s) : cellArray(m*n)
 
 Grid::~Grid()
 {
-	//free the vector
+	//FIXME: free the vector
 }//end destructor
 
 void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
