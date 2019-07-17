@@ -14,7 +14,7 @@ class Test : public cScreen
 private:
 public:
 	Test();
-	int Run(sf::RenderWindow &window);
+	int Run(sf::RenderWindow &window, Grid &grid);
 };
 
 //------------------------------------------------------------
@@ -22,7 +22,7 @@ public:
 
 Test::Test() {}
 
-int Test::Run(sf::RenderWindow &window)
+int Test::Run(sf::RenderWindow &window, Grid &grid)
 {
 	bool Running = true;
 	sf::CircleShape shape(100.f);

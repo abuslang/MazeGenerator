@@ -15,8 +15,8 @@ class Grid;
 class cScreen
 {
 public:
-	virtual int Run(sf::RenderWindow &window) = 0;
-	virtual int Run(sf::RenderWindow &window, Grid &grid) { return 0; }
+	virtual int Run(sf::RenderWindow &window, Grid &grid) = 0;
+	//virtual int Run(sf::RenderWindow &window, Grid &grid) { return 0; }
 };
 
 #endif CSCREEN_H

@@ -11,8 +11,7 @@ private:
 public:
 	TestGrid();
 
-	int Run(sf::RenderWindow &window);
-	int Run(sf::RenderWindow &window, const Grid &grid);
+	int Run(sf::RenderWindow &window, Grid &grid);
 };
 
 //------------------------------------------------------------
@@ -23,12 +22,7 @@ TestGrid::TestGrid()
 
 }
 
-int TestGrid::Run(sf::RenderWindow &window)
-{
-	return -1;
-}
-
-int TestGrid::Run(sf::RenderWindow &window, const Grid &grid)
+int TestGrid::Run(sf::RenderWindow &window, Grid &grid)
 {
 	bool Running = true;
 
