@@ -5,18 +5,17 @@
 */
 
 
-#ifndef CSCREEN_H
-#define CSCREEN_H
+#ifndef BASIC_SCREEN_H
+#define BASIC_SCREEN_H
 #pragma once
 #include "SFML/Graphics.hpp"
 
 class Grid;
 
-class cScreen
+class BasicScreen
 {
 public:
 	virtual int Run(sf::RenderWindow &window, Grid &grid) = 0;
-	//virtual int Run(sf::RenderWindow &window, Grid &grid) { return 0; }
 };
 
-#endif CSCREEN_H
+#endif //BASIC_SCREEN_H

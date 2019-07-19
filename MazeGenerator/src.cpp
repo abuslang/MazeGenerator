@@ -1,8 +1,9 @@
 /*
-	Contributors: Saad Bhatti, Abdus Quadri
+	Contributors: Saad Bhatti, Abdusammad Quadri
 	
-	Description: This program demonstrates various Maze generation and solution algorithms with
-				the use of the SFML library for visuals.
+	Description: 
+	This program demonstrates various Maze generation and solution algorithms with
+	the use of the SFML library for visuals.
 
 	DELETE THIS COMMENT LATER
 
@@ -28,13 +29,16 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Maze Generator!");	//this window will be passed around from screen to screen
-	std::vector<cScreen*> Screens;											//vector of available screens, can switch from screen to screen by returning its index			
+	std::vector<BasicScreen*> Screens;											//vector of available screens, can switch from screen to screen by returning its index			
 	
 	Test testScreen;
 	TestGrid testGrid;
+	RecursiveBacktracker backtracker;
 
 	Screens.push_back(&testScreen);	//idx 0
 	Screens.push_back(&testGrid);	//idx 1
+	Screens.push_back(&backtracker);	//idx 2
+
 
 	int m = 20;				//get these from user
 	int n = 20;

@@ -2,10 +2,10 @@
 #define TEST_GRID_H
 #pragma once
 
-#include "cScreen.h"
+#include "BasicScreen.h"
 #include "Grid.h"
 
-class TestGrid : public cScreen
+class TestGrid : public BasicScreen
 {
 private:
 public:

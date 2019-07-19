@@ -7,9 +7,9 @@
 #define TEST_H
 #pragma once
 
-#include "cScreen.h"
+#include "BasicScreen.h"
 
-class Test : public cScreen
+class Test : public BasicScreen
 {
 private:
 public:
