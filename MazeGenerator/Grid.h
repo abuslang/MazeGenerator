@@ -31,6 +31,7 @@ public:
 	//mutator methods
 	void setState(int row, int col, int state);
 	void setState(int idx, int state);
+	void setColor(int idx, sf::Color color);
 	
 };
 //------------------------------------------------------------
@@ -95,6 +96,11 @@ void Grid::setState(int row, int col, int state)
 void Grid::setState(int idx, int state)
 {
 	cellArray[idx].setState(state);
+}
+
+void Grid::setColor(int idx, sf::Color color)
+{
+	cellArray[idx].setColor(color);
 }
 
 

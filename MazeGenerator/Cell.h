@@ -42,6 +42,7 @@ public:
 
 	//mutator methods
 	void setState(int s);
+	void setColor(sf::Color color);
 
 };
 //------------------------------------------------------------
@@ -83,6 +84,23 @@ void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
 	target.draw(left);
 	target.draw(right);
 }//end draw
+
+
+//accessor methods
+
+int Cell::getState() { return state; }
+
+int Cell::getColIdx() { return colIdx; }
+
+int Cell::getRowIdx() { return rowIdx; }
+
+int Cell::getSize() { return s; }
+
+//mutator methods
+void Cell::setColor(sf::Color color)
+{
+	body.setFillColor(color);
+}
 
 void Cell::setState(int s)
 {
@@ -126,13 +144,6 @@ void Cell::setState(int s)
 	}
 }
 
-int Cell::getState() { return state; }
-
-int Cell::getColIdx() { return colIdx; }
-
-int Cell::getRowIdx() { return rowIdx; }
-
-int Cell::getSize() { return s; }
 
 
 #endif

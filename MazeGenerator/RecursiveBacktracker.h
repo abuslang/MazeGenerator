@@ -57,6 +57,12 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 
 		window.clear();
 
+		if (!stack.empty())
+		{
+			//this is to reset the color of the cell at the top of the stack
+			grid.setState(offset(0, 0), grid.getState(offset(0, 0)));
+		}
+	
 		//the algo is in this if
 		//it's inside an if b/c we want to se the maze generate in realtime
 		if (visitedCount < (grid.getNumCols() * grid.getNumRows()))
@@ -79,11 +85,10 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			if (stack.top().second > 0 && ((grid.getState(offset(0, -1)) & CELL_VISITED) == 0x0))
 				neighbours.push_back(3);
 
-
-
 			//now the neighbor vector may not be populated with unvisited neighbors
 			if (!neighbours.empty())
 			{
+
 				// Choose one available neighbour at random
 				int nextCellDir = neighbours[rand() % neighbours.size()];
 
@@ -116,21 +121,27 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 
 				//make neighbor cell visited
 				grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_VISITED);
+
+				//make the top of the stack distinct so we can see it moving
+				grid.setColor(offset(0, 0), sf::Color::Red);
 				visitedCount++;
 			}
 			else 
 			{
 				stack.pop();
+
+				//make the top of the stack distinct so we can see it moving
+				grid.setColor(offset(0, 0), sf::Color::Red);
 			}
 		}//end algo if
 
+
 		window.draw(grid);
 		window.display();
-	}
+	}//end render loop
 
 	//never reaches here
 	return -1;
 
 }
-
 #endif
