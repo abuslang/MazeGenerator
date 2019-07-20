@@ -4,7 +4,7 @@
 
 #include "SFML/Graphics.hpp"
 
-enum PathEnum
+enum
 {
 	CELL_PATH_N = (int)0x01,		//00001
 	CELL_PATH_E = (int)0x02,		//00010
@@ -52,7 +52,7 @@ Cell::Cell(){}
 Cell::Cell(int row, int col, int s) : rowIdx(row), colIdx(col), s(s)
 {
 	//set the positions and default values for the cell attributes
-	state = 0;
+	state = (int)0x00000;
 
 	body.setSize(sf::Vector2f(s, s));
 	body.setFillColor(sf::Color::Blue);
@@ -100,24 +100,29 @@ void Cell::setState(int s)
 	{
 		//then remove east/right wall
 		right.setFillColor(sf::Color::Transparent);
+
 	}
 
 	if ((state & CELL_PATH_N) == CELL_PATH_N)
 	{
 		//then remove north/top wall
 		top.setFillColor(sf::Color::Transparent);
+
 	}
 
 	if ((state & CELL_PATH_W) == CELL_PATH_W)
 	{
 		//then remove west/left wall
 		left.setFillColor(sf::Color::Transparent);
+
+
 	}
 
 	if ((state & CELL_PATH_S) == CELL_PATH_S)
 	{
 		//then remove west/left wall
 		bottom.setFillColor(sf::Color::Transparent);
+
 	}
 }
 
