@@ -6,11 +6,11 @@
 
 enum PathEnum
 {
-	CELL_PATH_N = 0x01,		//00001
-	CELL_PATH_E = 0x02,		//00010
-	CELL_PATH_S = 0x04,		//00100
-	CELL_PATH_W = 0x08,		//01000
-	CELL_VISITED = 0x10,	//10000
+	CELL_PATH_N = (int)0x01,		//00001
+	CELL_PATH_E = (int)0x02,		//00010
+	CELL_PATH_S = (int)0x04,		//00100
+	CELL_PATH_W = (int)0x08,		//01000
+	CELL_VISITED = (int)0x10,		//10000
 };
 
 
@@ -18,7 +18,7 @@ class Cell : public sf::Drawable
 {
 
 private:
-	int state;			//flag for whether its connected to any of its neighbors, and/or has been visited
+	int state;					//flag for whether its connected to any of its neighbors, and/or has been visited
 	sf::RectangleShape body;	//main body of the cell
 	sf::RectangleShape top;		//borders/walls of the cell
 	sf::RectangleShape right;

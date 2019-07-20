@@ -10,11 +10,6 @@ class RecursiveBacktracker : public BasicScreen
 {
 
 private:
-	int  visitedCount;
-	std::stack<std::pair<int, int>> stack;	//holds a stack of indexes of the cells
-
-
-
 public:
 	RecursiveBacktracker();
 	~RecursiveBacktracker();
@@ -25,16 +20,18 @@ public:
 
 RecursiveBacktracker::RecursiveBacktracker()
 {
-
 }
+
 RecursiveBacktracker::~RecursiveBacktracker()
 {
-	//Clear the stack
 }
 
 int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 {
 	bool Running = true;
+	int  visitedCount = 0;
+	std::stack<std::pair<int, int>> stack;	//holds a stack of indexes of the cells
+
 
 	//start from top-left cell
 	int x = 0;
@@ -92,21 +89,33 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 				switch (nextCellDir)
 				{
 				case 0:	//NORTH
-
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) || (int)CELL_PATH_N);
+					grid.setState(offset(0, -1), grid.getState(offset(0, -1)) || (int)CELL_PATH_S);
+					stack.push(std::make_pair((stack.top().first + 0), (stack.top().second - 1)));
 					break;
 
 				case 1:	//EAST
-
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) || (int)CELL_PATH_E);
+					grid.setState(offset(1, 0), grid.getState(offset(1, 0)) || (int)CELL_PATH_W);
+					stack.push(std::make_pair((stack.top().first + 1), (stack.top().second + 0)));
 					break;
 
 				case 2:	//SOUTH
-
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) || (int)CELL_PATH_S);
+					grid.setState(offset(0, 1), grid.getState(offset(0, 1)) || (int)CELL_PATH_N);
+					stack.push(std::make_pair((stack.top().first + 0), (stack.top().second + 1)));
 					break;
 
 				case 3:	//WEST
-
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) || (int)CELL_PATH_W);
+					grid.setState(offset(-1, 0), grid.getState(offset(-1, 0)) || (int)CELL_PATH_E);
+					stack.push(std::make_pair((stack.top().first - 1), (stack.top().second + 0)));
 					break;
 				}//end switch
+
+				//make current cell visited
+				grid.setState(offset(0, 0), grid.getState(offset(0, 0)) || (int)CELL_VISITED);
+				visitedCount++;
 			}
 			else 
 			{

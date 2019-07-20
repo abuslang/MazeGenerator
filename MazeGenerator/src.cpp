@@ -35,8 +35,8 @@ int main()
 	TestGrid testGrid;
 	RecursiveBacktracker backtracker;
 
-	Screens.push_back(&testScreen);	//idx 0
-	Screens.push_back(&testGrid);	//idx 1
+	Screens.push_back(&testScreen);		//idx 0
+	Screens.push_back(&testGrid);		//idx 1
 	Screens.push_back(&backtracker);	//idx 2
 
 
@@ -44,7 +44,7 @@ int main()
 	int n = 20;
 	Grid maze(m, n, 50);	//instantiate a 20 x 20 grid with Cell sizes of 50 x 50
 
-	int screen = TEST_GRID_SCREEN;			//initital screen will be test screen, in an actual release application, should be menu screen
+	int screen = RECURSIVE_BACKTRACKER_SCREEN;			//initital screen will be test screen, in an actual release application, should be menu screen
 	while (screen >= 0)
 	{
 		screen = Screens[screen]->Run(window, maze);
