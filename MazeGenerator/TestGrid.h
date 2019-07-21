@@ -24,15 +24,21 @@ TestGrid::TestGrid()
 
 int TestGrid::Run(sf::RenderWindow &window, Grid &grid)
 {
+	window.setTitle("Test Grid Screen");
 	bool Running = true;
+	sf::Event event;
 
 	while (Running)
 	{
-		sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				return -1;
+				return (-1);
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+					return (-1);
+			}
 		}
 
 		window.clear();
@@ -41,7 +47,7 @@ int TestGrid::Run(sf::RenderWindow &window, Grid &grid)
 	}
 
 	//never reaches here
-	return -1;
+	return (-1);
 }
 
 #endif

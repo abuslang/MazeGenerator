@@ -41,5 +41,8 @@
     <ClInclude Include="BasicScreen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DFS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

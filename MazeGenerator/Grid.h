@@ -11,9 +11,10 @@ class Grid : public sf::Drawable
 {
 
 private:
-	int numRows;	//num of rows
-	int numCols;	//num of cols
-	int s;	//size of cell
+	int numRows;			//num of rows
+	int numCols;			//num of cols
+	int s;					//size of cell
+	bool hasBeenGenerated;	//FIXME:may not use, flag for whether the maze has already been generated or not
 	std::vector<Cell> cellArray;
 
 public:
@@ -31,7 +32,9 @@ public:
 	//mutator methods
 	void setState(int row, int col, int state);
 	void setState(int idx, int state);
+	void setColor(int row, int col, sf::Color color);
 	void setColor(int idx, sf::Color color);
+	void resetGeneration();
 	
 };
 //------------------------------------------------------------
@@ -40,7 +43,7 @@ public:
 Grid::Grid(int m, int n, int s) : cellArray(m*n), numRows(m), numCols(n)
 {
 	//create a m x n grid with empty cells of size s x s
-
+	hasBeenGenerated = false;
 	for (int row = 0; row < m; row++)
 	{
 		for (int col = 0; col < n; col++)
@@ -52,7 +55,8 @@ Grid::Grid(int m, int n, int s) : cellArray(m*n), numRows(m), numCols(n)
 
 Grid::~Grid()
 {
-	//FIXME: free the vector
+	cellArray.clear();
+	std::vector<Cell>().swap(cellArray);
 }//end destructor
 
 void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -101,6 +105,23 @@ void Grid::setState(int idx, int state)
 void Grid::setColor(int idx, sf::Color color)
 {
 	cellArray[idx].setColor(color);
+}
+
+void Grid::setColor(int row, int col, sf::Color color)
+{
+	cellArray[row*numCols + col].setColor(color);
+}
+
+void Grid::resetGeneration()
+{
+	hasBeenGenerated = false;
+	for (int row = 0; row < numRows; row++)
+	{
+		for (int col = 0; col < numCols; col++)
+		{
+			cellArray[row*numCols + col].setState(0);
+		}
+	}
 }
 
 

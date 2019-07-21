@@ -24,6 +24,7 @@ Test::Test() {}
 
 int Test::Run(sf::RenderWindow &window, Grid &grid)
 {
+	window.setTitle("Test Screen");
 	bool Running = true;
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
@@ -35,7 +36,12 @@ int Test::Run(sf::RenderWindow &window, Grid &grid)
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				return -1;
+				return (-1);
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+					return (-1);
+			}
 		}
 
 		window.clear();
@@ -44,7 +50,7 @@ int Test::Run(sf::RenderWindow &window, Grid &grid)
 	}
 
 	//never reaches here
-	return -1;
+	return (-1);
 }
 
 

@@ -28,15 +28,15 @@ RecursiveBacktracker::~RecursiveBacktracker()
 
 int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 {
+	window.setTitle("Recursive Backtracker Screen");
 	bool Running = true;
+	sf::Event event;
 	int visitedCount = 0;
 	std::stack<std::pair<int, int>> stack;	//holds a stack of indices of the cells
 
 	//start from top-left cell
-	int row = 0;
-	int col = 0;
-	stack.push(std::make_pair(row, col));
-	grid.setState(row, col, CELL_VISITED);
+	stack.push(std::make_pair(0, 0));
+	grid.setState(0, 0, GEN_VISITED);
 	visitedCount = 1;
 
 
@@ -48,14 +48,18 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 	//render loop
 	while (Running)
 	{
-		sf::Event event;
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
-				return -1;
+				return (-1);
+			if (event.type == sf::Event::KeyPressed)
+			{
+				if (event.key.code == sf::Keyboard::Escape)
+					return (-1);
+			}
 		}
 
-		window.clear();
+		
 
 		if (!stack.empty())
 		{
@@ -73,16 +77,16 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			//now check for neighbors in N, S, E and W directions
 
 			//if the cell is anywhere BUT row 0, then the cell has NORTH neighbor
-			if(stack.top().first > 0 && ((grid.getState(offset(-1, 0)) & CELL_VISITED) == 0x0))
+			if(stack.top().first > 0 && ((grid.getState(offset(-1, 0)) & GEN_VISITED) == 0x0))
 				neighbours.push_back(0);
 			//if the cell is anywhere but the last column, then the cell has EAST neighbor
-			if (stack.top().second < (grid.getNumCols() - 1) && ((grid.getState(offset(0, 1)) & CELL_VISITED) == 0x0))
+			if (stack.top().second < (grid.getNumCols() - 1) && ((grid.getState(offset(0, 1)) & GEN_VISITED) == 0x0))
 				neighbours.push_back(1);
 			//if the cell is anywhere but the bottom row, then it has SOUTH neighbor
-			if (stack.top().first < (grid.getNumRows() - 1) && ((grid.getState(offset(1, 0)) & CELL_VISITED) == 0x0))
+			if (stack.top().first < (grid.getNumRows() - 1) && ((grid.getState(offset(1, 0)) & GEN_VISITED) == 0x0))
 				neighbours.push_back(2);
 			//if the cell is anywhere but the 1st column, then it has WEST neighbor
-			if (stack.top().second > 0 && ((grid.getState(offset(0, -1)) & CELL_VISITED) == 0x0))
+			if (stack.top().second > 0 && ((grid.getState(offset(0, -1)) & GEN_VISITED) == 0x0))
 				neighbours.push_back(3);
 
 			//now the neighbor vector may not be populated with unvisited neighbors
@@ -95,32 +99,32 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 				switch (nextCellDir)
 				{
 				case 0:	//NORTH
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_PATH_N);
-					grid.setState(offset(-1, 0), grid.getState(offset(-1, 0)) | CELL_PATH_S);
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_N);
+					grid.setState(offset(-1, 0), grid.getState(offset(-1, 0)) | PATH_S);
 					stack.push(std::make_pair((stack.top().first - 1), (stack.top().second + 0)));
 					break;
 
 				case 1:	//EAST
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_PATH_E);
-					grid.setState(offset(0, 1), grid.getState(offset(0, 1)) | CELL_PATH_W);
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_E);
+					grid.setState(offset(0, 1), grid.getState(offset(0, 1)) | PATH_W);
 					stack.push(std::make_pair((stack.top().first + 0), (stack.top().second + 1)));
 					break;
 
 				case 2:	//SOUTH
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_PATH_S);
-					grid.setState(offset(1, 0), grid.getState(offset(1, 0)) | CELL_PATH_N);
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_S);
+					grid.setState(offset(1, 0), grid.getState(offset(1, 0)) | PATH_N);
 					stack.push(std::make_pair((stack.top().first + 1), (stack.top().second + 0)));
 					break;
 
 				case 3:	//WEST
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_PATH_W);
-					grid.setState(offset(0, -1), grid.getState(offset(0, -1)) | CELL_PATH_E);
+					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_W);
+					grid.setState(offset(0, -1), grid.getState(offset(0, -1)) | PATH_E);
 					stack.push(std::make_pair((stack.top().first + 0), (stack.top().second - 1)));
 					break;
 				}//end switch
 
 				//make neighbor cell visited
-				grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | CELL_VISITED);
+				grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | GEN_VISITED);
 
 				//make the top of the stack distinct so we can see it moving
 				grid.setColor(offset(0, 0), sf::Color::Red);
@@ -135,13 +139,13 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			}
 		}//end algo if
 
-
+		window.clear();
 		window.draw(grid);
 		window.display();
 	}//end render loop
 
 	//never reaches here
-	return -1;
+	return (-1);
 
 }
 #endif

@@ -6,11 +6,12 @@
 
 enum
 {
-	CELL_PATH_N = (int)0x01,		//00001
-	CELL_PATH_E = (int)0x02,		//00010
-	CELL_PATH_S = (int)0x04,		//00100
-	CELL_PATH_W = (int)0x08,		//01000
-	CELL_VISITED = (int)0x10,		//10000
+	PATH_N = 0x01,		//000001
+	PATH_E = 0x02,		//000010
+	PATH_S = 0x04,		//000100
+	PATH_W = 0x08,		//001000
+	GEN_VISITED = 0x10,	//010000	//visited flag used during generation stage
+	SOL_VISITED = 0x20,	//100000	//visited flag used during solution stage
 };
 
 
@@ -108,40 +109,40 @@ void Cell::setState(int s)
 	state = s; 
 
 	//now change the attributes to match the state
-	if ((state & CELL_VISITED) == CELL_VISITED)
-	{
+
+	if ((state & GEN_VISITED) == GEN_VISITED)
 		//then the body color should be white
 		body.setFillColor(sf::Color::White);
-	}
+	else
+		body.setFillColor(sf::Color::Blue);
 
-	if ((state & CELL_PATH_E) == CELL_PATH_E)
-	{
+
+	if ((state & PATH_E) == PATH_E)
 		//then remove east/right wall
 		right.setFillColor(sf::Color::Transparent);
+	else
+		right.setFillColor(sf::Color::Black);
 
-	}
 
-	if ((state & CELL_PATH_N) == CELL_PATH_N)
-	{
+	if ((state & PATH_N) == PATH_N)
 		//then remove north/top wall
 		top.setFillColor(sf::Color::Transparent);
+	else
+		top.setFillColor(sf::Color::Black);
 
-	}
 
-	if ((state & CELL_PATH_W) == CELL_PATH_W)
-	{
+	if ((state & PATH_W) == PATH_W)
 		//then remove west/left wall
 		left.setFillColor(sf::Color::Transparent);
+	else
+		left.setFillColor(sf::Color::Black);
 
 
-	}
-
-	if ((state & CELL_PATH_S) == CELL_PATH_S)
-	{
+	if ((state & PATH_S) == PATH_S)
 		//then remove west/left wall
 		bottom.setFillColor(sf::Color::Transparent);
-
-	}
+	else
+		bottom.setFillColor(sf::Color::Black);
 }
 
 
