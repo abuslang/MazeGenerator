@@ -35,6 +35,7 @@ public:
 	void setColor(int row, int col, sf::Color color);
 	void setColor(int idx, sf::Color color);
 	void resetGeneration();
+	void resetSolution();
 	
 };
 //------------------------------------------------------------
@@ -120,6 +121,17 @@ void Grid::resetGeneration()
 		for (int col = 0; col < numCols; col++)
 		{
 			cellArray[row*numCols + col].setState(0);
+		}
+	}
+}
+
+void Grid::resetSolution()
+{
+	for (int row = 0; row < numRows; row++)
+	{
+		for (int col = 0; col < numCols; col++)
+		{
+			cellArray[row*numCols + col].setState(cellArray[row*numCols + col].getState() & ~SOL_VISITED);
 		}
 	}
 }

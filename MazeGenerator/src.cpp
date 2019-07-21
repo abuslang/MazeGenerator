@@ -30,7 +30,7 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Maze Generator!");	//this window will be passed around from screen to screen
 
-	std::vector<BasicScreen*> Screens(10);	//vector of available screens, can switch from screen to screen by returning its index			
+	std::vector<BasicScreen*> Screens(100);	//vector of available screens, can switch from screen to screen by returning its index			
 	
 	//initializing the screens
 	Test testScreen;
@@ -44,8 +44,8 @@ int main()
 
 
 
-	int m = 10;				//get these from user
-	int n = 10;
+	int m = 20;				//get these from user
+	int n = 20;
 
 	int screenSize = (window.getSize().x < window.getSize().y) ? window.getSize().x : window.getSize().y;
 	int gridSize = (m > n) ? m: n;
@@ -56,8 +56,8 @@ int main()
 
 	//FIXME: Only For Testing
 	backtracker.Run(window, *maze);
-	testGrid.Run(window, *maze);
-	testScreen.Run(window, *maze);
+	backtracker.Run(window, *maze);
+	dfs.Run(window, *maze);
 	dfs.Run(window, *maze);
 	window.close();
 	delete maze;

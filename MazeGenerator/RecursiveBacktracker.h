@@ -29,14 +29,19 @@ RecursiveBacktracker::~RecursiveBacktracker()
 int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 {
 	window.setTitle("Recursive Backtracker Screen");
+	srand(time(NULL));
+	grid.resetGeneration();
+
 	bool Running = true;
 	sf::Event event;
 	int visitedCount = 0;
 	std::stack<std::pair<int, int>> stack;	//holds a stack of indices of the cells
 
-	//start from top-left cell
-	stack.push(std::make_pair(0, 0));
-	grid.setState(0, 0, GEN_VISITED);
+	//start from random cell
+	int row = rand() % (grid.getNumRows());
+	int col = rand() % (grid.getNumCols());
+	stack.push(std::make_pair(row, col));
+	grid.setState(row, col, GEN_VISITED);
 	visitedCount = 1;
 
 
