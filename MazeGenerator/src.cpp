@@ -5,7 +5,6 @@
 	This program demonstrates various Maze generation and solution algorithms with
 	the use of the SFML library for visuals.
 
-	DELETE THIS COMMENT LATER
 
 	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
@@ -25,6 +24,7 @@
 #include "SFML/Graphics.hpp"
 #include "Screens.h"
 #include "Grid.h"
+#include<iostream>
 
 int main()
 {
@@ -37,7 +37,10 @@ int main()
 	TestGrid testGrid;
 	RecursiveBacktracker backtracker;
 	DFS dfs;
+	Menu menu(1000, 1000);	// passing in size of renderwindow to put the options in the correct place
+							// did this cause window.getSize().x and window.getSize().y were giving me errors for some reason
 
+	Screens[MENU_SCREEN] = &menu;
 	Screens[TEST_GRID_SCREEN] = &testGrid;
 	Screens[RECURSIVE_BACKTRACKER_SCREEN] = &backtracker;
 	Screens[DFS_SCREEN] = &dfs;
@@ -54,6 +57,7 @@ int main()
 	maze = new Grid(m, n, screenSize/gridSize); //instantiate a 20 x 20 grid with Cell sizes of 50 x 50
 
 
+	/*
 	//FIXME: Only For Testing
 	backtracker.Run(window, *maze);
 	backtracker.Run(window, *maze);
@@ -63,15 +67,19 @@ int main()
 	delete maze;
 	return 0;
 
+	*/
 
-
-
-	int screen = RECURSIVE_BACKTRACKER_SCREEN;
+	
+	int screen = MENU_SCREEN;
 	while (screen >= 0)
 	{
+		std::cout << screen << std::endl;
 		screen = Screens[screen]->Run(window, *maze);
 	}
 	window.close();
+	
+
+
 
 	delete maze;
 	return (0);

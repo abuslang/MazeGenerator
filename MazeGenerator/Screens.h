@@ -7,8 +7,10 @@
 ///odd indices should be maze solving screens
 ///menu should be index 0
 ////////////////
+
 enum ScreenEnum
 {
+	MENU_SCREEN = 0,
 	TEST_GRID_SCREEN = 1,
 	RECURSIVE_BACKTRACKER_SCREEN = 2,
 	DFS_SCREEN = 3,
@@ -22,5 +24,6 @@ enum ScreenEnum
 #include "TestGrid.h"	//draws the entire grid, using it to see if grid setting up correctly
 #include "RecursiveBacktracker.h"
 #include "DFS.h"
+#include "Menu.h"
 
 #endif // SCREENS_H
