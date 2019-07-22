@@ -60,7 +60,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
-					return (-1);
+					return (0);
 			}
 		}
 
