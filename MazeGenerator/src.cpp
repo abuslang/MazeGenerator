@@ -37,9 +37,7 @@ int main()
 	TestGrid testGrid;
 	RecursiveBacktracker backtracker;
 	DFS dfs;
-	Menu menu(1000, 1000);	// passing in size of renderwindow to put the options in the correct place
-							// did this cause window.getSize().x and window.getSize().y were giving me errors for some reason
-
+	Menu menu((float)window.getSize().x, (float)window.getSize().y);
 	Screens[MENU_SCREEN] = &menu;
 	Screens[TEST_GRID_SCREEN] = &testGrid;
 	Screens[RECURSIVE_BACKTRACKER_SCREEN] = &backtracker;
@@ -55,19 +53,6 @@ int main()
 
 	Grid *maze;
 	maze = new Grid(m, n, screenSize/gridSize); //instantiate a 20 x 20 grid with Cell sizes of 50 x 50
-
-
-	/*
-	//FIXME: Only For Testing
-	backtracker.Run(window, *maze);
-	backtracker.Run(window, *maze);
-	dfs.Run(window, *maze);
-	dfs.Run(window, *maze);
-	window.close();
-	delete maze;
-	return 0;
-
-	*/
 
 	
 	int screen = MENU_SCREEN;
