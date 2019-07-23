@@ -158,6 +158,7 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 
 		if (wallsDown < (numCols * numRows) - 1)
 		{
+			std::cout << "Kruskals is generating		\r";
 			std::vector<int> neighbours;
 			int randIdx = rand() % cells.size();
 			std::tuple<int, int, int> randCell = cells[randIdx];
@@ -170,22 +171,22 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 			//now check for neighbors in N, S, E and W directions
 
 			//if the cell is anywhere BUT row 0, then the cell has NORTH neighbor
-			if (std::get<0>(randCell) > 0)
-				if(DJSfind(offset(0, 0)) != DJSfind(offset(-1, 0)) )
+			if (std::get<0>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_N) == 0x0)
+				if(DJSfind(offset(0, 0)) != DJSfind(offset(-1, 0)))
 					neighbours.push_back(0);
 
 			//if the cell is anywhere but the last column, then the cell has EAST neighbor
-			if (std::get<1>(randCell) < (grid.getNumCols() - 1) )
+			if (std::get<1>(randCell) < (grid.getNumCols() - 1) && (grid.getState(offset(0, 0)) & PATH_E) == 0x0)
 				if(DJSfind(offset(0, 0)) != DJSfind(offset(0, 1)))
 					neighbours.push_back(1);
 
 			//if the cell is anywhere but the bottom row, then it has SOUTH neighbor
-			if (std::get<0>(randCell) < (grid.getNumRows() - 1) )
+			if (std::get<0>(randCell) < (grid.getNumRows() - 1) && (grid.getState(offset(0, 0)) & PATH_S) == 0x0)
 				if (DJSfind(offset(0, 0)) != DJSfind(offset(1, 0)))
 					neighbours.push_back(2);
 
 			//if the cell is anywhere but the 1st column, then it has WEST neighbor
-			if (std::get<1>(randCell) > 0 )
+			if (std::get<1>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_W) == 0x0)
 				if (DJSfind(offset(0, 0)) != DJSfind(offset(0, -1)))
 					neighbours.push_back(3);
 
@@ -232,7 +233,7 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 		}// end algo if
 		else
 		{
-			std::cout << "Kruskals is done" << std::endl;
+			std::cout << "Kruskals is done			\r";
 		}
 
 		window.clear();
