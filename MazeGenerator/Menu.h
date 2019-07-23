@@ -56,7 +56,7 @@ private:
 
 		genMenu[1].setFont(font);
 		genMenu[1].setFillColor(sf::Color::White);
-		genMenu[1].setString("Options");
+		genMenu[1].setString("Kruskal's Algorithm");
 		genMenu[1].setPosition(sf::Vector2f(width / 4, height / (NUM_GENERATION_ALG + 1) * 2));
 
 		genMenu[2].setFont(font);
@@ -121,6 +121,7 @@ private:
 	int Menu::Run(sf::RenderWindow &window, Grid &grid)
 	{
 		mainMenu = !mainMenu;
+		menuIndex = 0;
 		while (window.isOpen()) {
 			sf::Event event;
 
@@ -144,13 +145,15 @@ private:
 						switch (this->getPressedItem())
 						{
 						case 0:
+							std::cout << mainMenu << std::endl;
 							if (mainMenu)
 								return RECURSIVE_BACKTRACKER_SCREEN;
 							else
 								return DFS_SCREEN;
 							break;
 						case 1:
-							std::cout << "Options" << std::endl;
+							if (mainMenu)
+								return KRUSKALS_SCREEN;
 							break;
 						case 2:
 							window.close();
