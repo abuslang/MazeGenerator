@@ -29,7 +29,6 @@
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(1000, 1000), "Maze Generator!");	//this window will be passed around from screen to screen
-
 	std::vector<BasicScreen*> Screens(100);	//vector of available screens, can switch from screen to screen by returning its index			
 	
 	//initializing the screens
@@ -37,16 +36,19 @@ int main()
 	TestGrid testGrid;
 	RecursiveBacktracker backtracker;
 	DFS dfs;
+	Kruskals kruskals;
 	Menu menu((float)window.getSize().x, (float)window.getSize().y);
+
 	Screens[MENU_SCREEN] = &menu;
 	Screens[TEST_GRID_SCREEN] = &testGrid;
 	Screens[RECURSIVE_BACKTRACKER_SCREEN] = &backtracker;
 	Screens[DFS_SCREEN] = &dfs;
+	Screens[KRUSKALS_SCREEN] = &kruskals;
 
 
 
-	int m = 20;				//get these from user
-	int n = 20;
+	int m = 10;				//get these from user
+	int n = 10;
 
 	int screenSize = (window.getSize().x < window.getSize().y) ? window.getSize().x : window.getSize().y;
 	int gridSize = (m > n) ? m: n;
@@ -55,6 +57,21 @@ int main()
 	maze = new Grid(m, n, screenSize/gridSize); //instantiate a 20 x 20 grid with Cell sizes of 50 x 50
 
 	
+
+	//FIXME: FOR TEST ONLY
+	backtracker.Run(window, *maze);
+	dfs.Run(window, *maze);
+	kruskals.Run(window, *maze);
+	dfs.Run(window, *maze);
+	window.close();
+
+
+
+
+	delete maze;
+	return (0);
+
+
 	int screen = MENU_SCREEN;
 	while (screen >= 0)
 	{

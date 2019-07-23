@@ -14,6 +14,7 @@ enum ScreenEnum
 	TEST_GRID_SCREEN = 1,
 	RECURSIVE_BACKTRACKER_SCREEN = 2,
 	DFS_SCREEN = 3,
+	KRUSKALS_SCREEN = 4,
 };
 
 //Basic Screen Class
