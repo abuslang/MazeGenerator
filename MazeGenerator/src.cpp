@@ -61,17 +61,15 @@ int main()
 	//FIXME: FOR TEST ONLY
 	//backtracker.Run(window, *maze);
 	//dfs.Run(window, *maze);
+	/*
 	kruskals.Run(window, *maze);
 	kruskals.Run(window, *maze);
 	kruskals.Run(window, *maze);
 	dfs.Run(window, *maze);
 	window.close();
+	*/
 
 
-
-
-	delete maze;
-	return (0);
 
 
 	int screen = MENU_SCREEN;
