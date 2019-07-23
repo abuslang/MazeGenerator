@@ -59,8 +59,10 @@ int main()
 	
 
 	//FIXME: FOR TEST ONLY
-	backtracker.Run(window, *maze);
-	dfs.Run(window, *maze);
+	//backtracker.Run(window, *maze);
+	//dfs.Run(window, *maze);
+	kruskals.Run(window, *maze);
+	kruskals.Run(window, *maze);
 	kruskals.Run(window, *maze);
 	dfs.Run(window, *maze);
 	window.close();
