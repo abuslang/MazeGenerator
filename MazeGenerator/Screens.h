@@ -24,6 +24,7 @@ enum ScreenEnum
 #include "TestGrid.h"	//draws the entire grid, using it to see if grid setting up correctly
 #include "RecursiveBacktracker.h"
 #include "DFS.h"
+#include "Kruskals.h"
 #include "Menu.h"
 
 #endif // SCREENS_H
