@@ -123,6 +123,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="DFS.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Kruskals.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="RecursiveBacktracker.cpp" />
     <ClCompile Include="src.cpp" />
   </ItemGroup>
   <ItemGroup>
