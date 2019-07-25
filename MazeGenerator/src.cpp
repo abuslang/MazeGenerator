@@ -68,7 +68,7 @@ int main()
 	window.close();
 
 
-
+	
 
 	delete maze;
 	return (0);
