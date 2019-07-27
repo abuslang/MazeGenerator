@@ -40,7 +40,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 
 	sf::Text finishedPrompt;
 	finishedPrompt.setFont(font);
-	finishedPrompt.setString("!Press Return\nTo Continue!");
+	finishedPrompt.setString("Press Return\nTo Continue");
 	finishedPrompt.setCharacterSize(60);
 	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
 	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
