@@ -83,7 +83,7 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 				{
 					while (!stack.empty())
 						stack.pop();
-					return (0);
+					return (MENU_SCREEN);
 				}
 				if (event.key.code == sf::Keyboard::Space)
 					paused = !paused;

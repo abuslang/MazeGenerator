@@ -19,7 +19,6 @@ public:
 	int Run(sf::RenderWindow &window, Grid &grid);
 	void drawGenScreen(sf::RenderWindow &window);
 	void drawSolveScreen(sf::RenderWindow &window);
-	int getPressedItem();
 };
 // Menu.cpp --------------------------------------------------------------------------------------------------
 
@@ -30,16 +29,17 @@ MainMenu::MainMenu()
 		std::cout << "oh no\n";
 		exit(EXIT_FAILURE);
 	}
-	nameArr.push_back("Menu Screen");
 	nameArr.push_back("Recursive Backtracker");
 	nameArr.push_back("Depth First Search");
 	nameArr.push_back("Kruskal's");
+	//nameArr.push_back("BFS");
 
 	title.setFont(font);
 	title.setFillColor(sf::Color::White);
-	title.setCharacterSize(60);
-	title.setPosition(0, 0);
+	title.setCharacterSize(30);
 	title.setString("Maze Generation and Solving");
+	title.setStyle(sf::Text::Bold);
+	title.setOrigin(title.getLocalBounds().width / 2,0);
 
 	forceGen = false;
 }
@@ -59,15 +59,19 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 	sf::Text escPrompt;
 	escPrompt.setFont(font);
 	escPrompt.setFillColor(sf::Color::White);
-	escPrompt.setCharacterSize(45);
+	escPrompt.setCharacterSize(30);
 	escPrompt.setString("Press Escape To Exit");
-	escPrompt.setOrigin(escPrompt.getLocalBounds().width / 2, escPrompt.getLocalBounds().height / 2);
-	escPrompt.setPosition(sf::Vector2f(window.getSize().x / 2, 40));
+	escPrompt.setOrigin(escPrompt.getLocalBounds().width / 2, 0);
+	escPrompt.setPosition(sf::Vector2f(window.getSize().x / 2, .8 * window.getSize().y));
+	title.setPosition(sf::Vector2f(window.getSize().x / 2, 0));
+
 
 	sf::Event event;
 	int r = (rand() % 256);
 	int g = (rand() % 256);
 	int b = (rand() % 256);
+
+	idx = 0;
 
 	while (Running)
 	{
@@ -80,23 +84,40 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 		{
 			if (event.type == sf::Event::Closed)
 				return (-1);
-			if (event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
 				if(event.key.code == sf::Keyboard::Escape)
 					return (-1);
-				if(event.key.code == sf::Keyboard::Return)
-					return getPressedItem();
-				if (event.key.code == sf::Keyboard::Right)
+				else if(event.key.code == sf::Keyboard::Backspace)
+					forceGen = true;
+				else if (event.key.code == sf::Keyboard::Return)
 				{
-					if (!grid.getMazeGenFlag() || forceGen)
+					forceGen = false;
+					return idx;
+				}
+				else if (event.key.code == sf::Keyboard::Right)
+				{
+					if (idx + 2 < LAST_ENUM)
 					{
-					//incr to next generation algo
+						idx += 2;
+					}
+					else 
+					{
+						std::cout << "idx will be out of bounds" << std::endl;
+					}
+
+				}
+				else if (event.key.code == sf::Keyboard::Left)
+				{
+					if (idx - 2 >= 0)
+					{
+						idx -= 2;
 					}
 					else
 					{
-					//incr to next solving algo
-
+						std::cout << "idx will be out of bounds" << std::endl;
 					}
+						
 				}
 			}
 		}
@@ -104,11 +125,17 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 		if (!grid.getMazeGenFlag() || forceGen)
 		{
 			//if maze has not been generated, then prompt the user to select a generation algo
+
+			//make sure idx is even
+			if (idx % 2 != 0)
+				idx = 0;		
 			drawGenScreen(window);
-			forceGen = false;
 		}
 		else if (grid.getMazeGenFlag())
 		{
+			//make sure idx is odd
+			if (idx % 2 == 0)
+				idx = 1;
 			//else prompt the user for a maze solving algo OR ask if the user wants to regenerate
 			drawSolveScreen(window);
 		}
@@ -126,7 +153,63 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 
 void MainMenu::drawGenScreen(sf::RenderWindow &window) 
 {
+	sf::Text subTitle;
+	subTitle.setFont(font);
+	subTitle.setFillColor(sf::Color::White);
+	subTitle.setCharacterSize(30);
+	subTitle.setString("Maze Generation Algorithms");
+	subTitle.setStyle(sf::Text::Underlined | sf::Text::Regular);
+	subTitle.setOrigin(subTitle.getLocalBounds().width / 2, 0);
+	subTitle.setPosition(sf::Vector2f(window.getSize().x / 2, .25 * window.getSize().y));
 
+	std::string str;
+	str = "<- " + nameArr[idx] + " ->";
+	sf::Text algo;
+	algo.setFont(font);
+	algo.setFillColor(sf::Color::White);
+	algo.setCharacterSize(30);
+	algo.setString(str);
+	algo.setOrigin(algo.getLocalBounds().width / 2, 0);
+	algo.setPosition(sf::Vector2f(window.getSize().x / 2, .5 * window.getSize().y));
+
+	window.draw(subTitle);
+	window.draw(algo);
+}//end draw gen screen
+
+void MainMenu::drawSolveScreen(sf::RenderWindow &window)
+{
+	sf::Text subTitle;
+	subTitle.setFont(font);
+	subTitle.setFillColor(sf::Color::White);
+	subTitle.setCharacterSize(30);
+	subTitle.setString("Maze Solving Algorithms");
+	subTitle.setStyle(sf::Text::Underlined | sf::Text::Regular);
+	subTitle.setOrigin(subTitle.getLocalBounds().width / 2, 0);
+	subTitle.setPosition(sf::Vector2f(window.getSize().x / 2, .25 * window.getSize().y));
+
+	std::string str;
+	str = "<- " + nameArr[idx] + " ->";
+	sf::Text algo;
+	algo.setFont(font);
+	algo.setFillColor(sf::Color::White);
+	algo.setCharacterSize(30);
+	algo.setString(str);
+	algo.setOrigin(algo.getLocalBounds().width / 2, 0);
+	algo.setPosition(sf::Vector2f(window.getSize().x / 2, .5 * window.getSize().y));
+
+	sf::Text forceGenPrompt;
+	forceGenPrompt.setString("Press Backspace to Regenerate Maze");
+	forceGenPrompt.setFont(font);
+	forceGenPrompt.setFillColor(sf::Color::White);
+	forceGenPrompt.setCharacterSize(25);
+	forceGenPrompt.setStyle(sf::Text::Italic | sf::Text::Regular);
+	forceGenPrompt.setOrigin(forceGenPrompt.getLocalBounds().width / 2, 0);
+	forceGenPrompt.setPosition(sf::Vector2f(window.getSize().x / 2, .75 * window.getSize().y));
+
+	window.draw(subTitle);
+	window.draw(algo);
+	window.draw(forceGenPrompt);
 }
+
 
 #endif // !MAIN_MENU_H

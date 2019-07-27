@@ -37,7 +37,7 @@ int main()
 	RecursiveBacktracker backtracker;
 	DFS dfs;
 	Kruskals kruskals;
-	Menu menu((float)window.getSize().x, (float)window.getSize().y);
+	MainMenu menu;
 
 	Screens[MENU_SCREEN] = &menu;
 	Screens[RECURSIVE_BACKTRACKER_SCREEN] = &backtracker;

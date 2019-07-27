@@ -69,7 +69,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			if (event.type == sf::Event::KeyPressed)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
-					return (0);
+					return (MENU_SCREEN);
 				if (event.key.code == sf::Keyboard::Space)
 					paused = !paused;
 			}
