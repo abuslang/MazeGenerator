@@ -16,13 +16,14 @@
 ///even indices should be maze solving screens
 ///menu should be index 0
 ////////////////
-
 enum ScreenEnum
 {
 	RECURSIVE_BACKTRACKER_SCREEN,	//0
 	DFS_SCREEN,						//1
 	KRUSKALS_SCREEN,				//2
-	//BFS_SCREEN					//3
+	//BFS_SCREEN,					//3
+	//ANOTHER_GENERATION_ALGO		//4
+	//ETC
 	LAST_ENUM,
 	MENU_SCREEN,
 };
@@ -34,13 +35,7 @@ class BasicScreen
 private:
 public:
 	sf::Font font;
-	BasicScreen()
-	{
-		if (!font.loadFromFile("Gamegirl.ttf")) {
-			// only execute if failed to load
-			std::cout << "Font Failed to Load\n";
-		}
-	}
+	BasicScreen();
 	virtual int Run(sf::RenderWindow &window, Grid &grid) = 0;
 };
 

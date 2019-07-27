@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BasicScreen.cpp" />
     <ClCompile Include="src.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -132,7 +133,6 @@
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Kruskals.h" />
     <ClInclude Include="MainMenu.h" />
-    <ClInclude Include="Menu.h" />
     <ClInclude Include="RecursiveBacktracker.h" />
     <ClInclude Include="Screens.h" />
     <ClInclude Include="test.h" />

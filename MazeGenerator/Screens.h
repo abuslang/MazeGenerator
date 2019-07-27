@@ -13,7 +13,6 @@
 #include "RecursiveBacktracker.h"
 #include "DFS.h"
 #include "Kruskals.h"
-#include "Menu.h"
 #include "MainMenu.h"
 
 #endif // SCREENS_H
