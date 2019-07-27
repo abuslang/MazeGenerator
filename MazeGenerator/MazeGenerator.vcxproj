@@ -125,6 +125,11 @@
   <ItemGroup>
     <ClCompile Include="BasicScreen.cpp" />
     <ClCompile Include="Cell.cpp" />
+    <ClCompile Include="DFS.cpp" />
+    <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="Kruskals.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
+    <ClCompile Include="RecursiveBacktracker.cpp" />
     <ClCompile Include="src.cpp" />
   </ItemGroup>
   <ItemGroup>

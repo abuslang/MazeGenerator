@@ -1,5 +1,4 @@
-#ifndef TEST_GRID_H
-#define TEST_GRID_H
+
 #pragma once
 
 #include "BasicScreen.h"
@@ -49,5 +48,3 @@ int TestGrid::Run(sf::RenderWindow &window, Grid &grid)
 	//never reaches here
 	return (-1);
 }
-
-#endif

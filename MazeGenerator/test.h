@@ -3,8 +3,6 @@
 	it shows how this "screen" system will flow.
 */
 
-#ifndef TEST_H
-#define TEST_H
 #pragma once
 
 #include "BasicScreen.h"
@@ -54,6 +52,5 @@ int Test::Run(sf::RenderWindow &window, Grid &grid)
 }
 
 
-#endif // !TEST_H
 
 

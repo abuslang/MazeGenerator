@@ -5,11 +5,8 @@
 */
 
 
-#ifndef BASIC_SCREEN_H
-#define BASIC_SCREEN_H
 #pragma once
 #include "SFML/Graphics.hpp"
-#include <iostream>
 
 /////////////////
 ///odd indices should be maze generating screens,
@@ -38,5 +35,3 @@ public:
 	BasicScreen();
 	virtual int Run(sf::RenderWindow &window, Grid &grid) = 0;
 };
-
-#endif //BASIC_SCREEN_H

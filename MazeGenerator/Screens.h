@@ -1,5 +1,4 @@
-#ifndef SCREENS_H
-#define SCREENS_H
+
 #pragma once
 
 
@@ -15,4 +14,3 @@
 #include "Kruskals.h"
 #include "MainMenu.h"
 
-#endif // SCREENS_H

@@ -1,4 +1,5 @@
 #include "BasicScreen.h"
+#include <iostream>
 
 
 BasicScreen::BasicScreen()
