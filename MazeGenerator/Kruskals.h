@@ -146,31 +146,33 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 	std::vector<std::tuple<int, int, int>> cells = disjointSet.copy();
 
 	bool paused = false;
-	int r = (rand() % 256);
-	int g = (rand() % 256);
-	int b = (rand() % 256);
 	sf::Text pausedPrompt;
 
 	pausedPrompt.setFont(font);
 	pausedPrompt.setString("!PAUSED!");
-	pausedPrompt.setCharacterSize(40);
+	pausedPrompt.setCharacterSize(60);
 	pausedPrompt.setOrigin(pausedPrompt.getLocalBounds().width / 2, pausedPrompt.getLocalBounds().height / 2);
 	pausedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
+	sf::Text finishedPrompt;
+	finishedPrompt.setFont(font);
+	finishedPrompt.setString("!Press Return To Continue!");
+	finishedPrompt.setCharacterSize(49);
+	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
+	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
 	while (Running)
 	{
-		window.clear();
 
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
 				return (-1);
-			if (event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::Escape)
+				if (event.key.code == sf::Keyboard::Return && grid.getMazeGenFlag())
 					return (MENU_SCREEN);
-				if (event.key.code == sf::Keyboard::Space)
+				else if (event.key.code == sf::Keyboard::Space)
 					paused = !paused;
 			}
 		}
@@ -261,14 +263,20 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 				grid.setMazeGenFlag(true);
 			}
 		}//end if paused
-		else
+
+		window.clear();
+		window.draw(grid);
+		if (grid.getMazeGenFlag())
 		{
-			pausedPrompt.setFillColor(sf::Color(r*std::sin(time(NULL)), g*std::sin(time(NULL)), b*std::sin(time(NULL))));
+			finishedPrompt.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
+			window.draw(finishedPrompt);
+
+		}
+		else if (paused)
+		{
+			pausedPrompt.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
 			window.draw(pausedPrompt);
 		}
-		
-
-		window.draw(grid);
 		window.display();
 	}
 

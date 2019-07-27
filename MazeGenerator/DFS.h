@@ -51,21 +51,23 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 
 
 	bool paused = false;
-	int r = (rand() % 256);
-	int g = (rand() % 256);
-	int b = (rand() % 256);
 	sf::Text pausedPrompt;
-
 	pausedPrompt.setFont(font);
 	pausedPrompt.setString("!PAUSED!");
-	pausedPrompt.setCharacterSize(40);
+	pausedPrompt.setCharacterSize(60);
 	pausedPrompt.setOrigin(pausedPrompt.getLocalBounds().width / 2, pausedPrompt.getLocalBounds().height / 2);
 	pausedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
+	sf::Text finishedPrompt;
+	finishedPrompt.setFont(font);
+	finishedPrompt.setString("!Press Return To Continue!");
+	finishedPrompt.setCharacterSize(39);
+	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
+	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
 	while (Running)
 	{
 
-		window.clear();
 
 		sf::Event event;
 		while (window.pollEvent(event))
@@ -77,15 +79,15 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 				return (-1);
 			}
 				
-			if (event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyPressed)
 			{
-				if (event.key.code == sf::Keyboard::Escape)
+				if (event.key.code == sf::Keyboard::Return && grid.getMazeSolFlag())
 				{
 					while (!stack.empty())
 						stack.pop();
 					return (MENU_SCREEN);
 				}
-				if (event.key.code == sf::Keyboard::Space)
+				else if (event.key.code == sf::Keyboard::Space)
 					paused = !paused;
 					
 			}
@@ -154,15 +156,20 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 			}
 
 		}//end if !paused
-		else
+		
+		window.clear();
+		window.draw(grid);
+		if (grid.getMazeSolFlag())
 		{
-			pausedPrompt.setFillColor(sf::Color(r*std::sin(time(NULL)), g*std::sin(time(NULL)), b*std::sin(time(NULL))));
+			finishedPrompt.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
+			window.draw(finishedPrompt);
+
+		}
+		else if (paused)
+		{
+			pausedPrompt.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
 			window.draw(pausedPrompt);
 		}
-		
-
-
-		window.draw(grid);
 		window.display();
 	}//end render loop
 

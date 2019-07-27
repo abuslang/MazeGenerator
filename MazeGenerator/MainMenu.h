@@ -36,7 +36,7 @@ MainMenu::MainMenu()
 
 	title.setFont(font);
 	title.setFillColor(sf::Color::White);
-	title.setCharacterSize(30);
+	title.setCharacterSize(35);
 	title.setString("Maze Generation and Solving");
 	title.setStyle(sf::Text::Bold);
 	title.setOrigin(title.getLocalBounds().width / 2,0);
@@ -58,26 +58,22 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 
 	sf::Text escPrompt;
 	escPrompt.setFont(font);
-	escPrompt.setFillColor(sf::Color::White);
-	escPrompt.setCharacterSize(30);
+	escPrompt.setFillColor(sf::Color::Yellow);
+	escPrompt.setCharacterSize(20);
 	escPrompt.setString("Press Escape To Exit");
 	escPrompt.setOrigin(escPrompt.getLocalBounds().width / 2, 0);
-	escPrompt.setPosition(sf::Vector2f(window.getSize().x / 2, .8 * window.getSize().y));
+	escPrompt.setPosition(sf::Vector2f(window.getSize().x / 2, .95 * window.getSize().y));
 	title.setPosition(sf::Vector2f(window.getSize().x / 2, 0));
 
 
 	sf::Event event;
-	int r = (rand() % 256);
-	int g = (rand() % 256);
-	int b = (rand() % 256);
-
 	idx = 0;
 
 	while (Running)
 	{
 		window.clear();
 
-		title.setFillColor(sf::Color( r*std::sin(time(NULL)), g*std::sin(time(NULL)), b*std::sin(time(NULL))));
+		title.setFillColor(sf::Color( 128 * std::sin(time(NULL)), 255 * std::sin(time(NULL)), 128 * std::cos(time(NULL))));
 		window.draw(title);
 
 		while (window.pollEvent(event))
@@ -103,7 +99,7 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 					}
 					else 
 					{
-						std::cout << "idx will be out of bounds" << std::endl;
+						std::cout << "idx will be out of bounds		\r";
 					}
 
 				}
@@ -115,11 +111,11 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 					}
 					else
 					{
-						std::cout << "idx will be out of bounds" << std::endl;
+						std::cout << "idx will be out of bounds		\r";
 					}
 						
 				}
-			}
+			}//end keyPressed event
 		}
 
 		if (!grid.getMazeGenFlag() || forceGen)
@@ -200,7 +196,7 @@ void MainMenu::drawSolveScreen(sf::RenderWindow &window)
 	sf::Text forceGenPrompt;
 	forceGenPrompt.setString("Press Backspace to Regenerate Maze");
 	forceGenPrompt.setFont(font);
-	forceGenPrompt.setFillColor(sf::Color::White);
+	forceGenPrompt.setFillColor(sf::Color::Green);
 	forceGenPrompt.setCharacterSize(25);
 	forceGenPrompt.setStyle(sf::Text::Italic | sf::Text::Regular);
 	forceGenPrompt.setOrigin(forceGenPrompt.getLocalBounds().width / 2, 0);
