@@ -50,8 +50,8 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 
 	sf::Text finishedPrompt;
 	finishedPrompt.setFont(font);
-	finishedPrompt.setString("!Press Return To Continue!");
-	finishedPrompt.setCharacterSize(39);
+	finishedPrompt.setString("!Press Return\nTo Continue!");
+	finishedPrompt.setCharacterSize(60);
 	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
 	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
@@ -170,7 +170,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 		window.draw(grid);
 		if (grid.getMazeGenFlag())
 		{
-			finishedPrompt.setFillColor(sf::Color(rand() % 255, rand() % 255, rand() % 255));
+			finishedPrompt.setFillColor(sf::Color(128 * std::sin(time(NULL)), 255 * std::sin(time(NULL)), 128 * std::cos(time(NULL))));
 			window.draw(finishedPrompt);
 
 		}
