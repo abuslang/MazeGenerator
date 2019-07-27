@@ -40,7 +40,6 @@ int main()
 	Menu menu((float)window.getSize().x, (float)window.getSize().y);
 
 	Screens[MENU_SCREEN] = &menu;
-	Screens[TEST_GRID_SCREEN] = &testGrid;
 	Screens[RECURSIVE_BACKTRACKER_SCREEN] = &backtracker;
 	Screens[DFS_SCREEN] = &dfs;
 	Screens[KRUSKALS_SCREEN] = &kruskals;
@@ -55,21 +54,6 @@ int main()
 
 	Grid *maze;
 	maze = new Grid(m, n, screenSize/gridSize); //instantiate a 20 x 20 grid with Cell sizes of 50 x 50
-
-	
-
-	//FIXME: FOR TEST ONLY
-	//backtracker.Run(window, *maze);
-	//dfs.Run(window, *maze);
-	/*
-	kruskals.Run(window, *maze);
-	kruskals.Run(window, *maze);
-	kruskals.Run(window, *maze);
-	dfs.Run(window, *maze);
-	window.close();
-	*/
-
-
 	
 
 	int screen = MENU_SCREEN;
@@ -79,10 +63,6 @@ int main()
 		screen = Screens[screen]->Run(window, *maze);
 	}
 	window.close();
-	
-
-
-
 	delete maze;
 	return (0);
 }

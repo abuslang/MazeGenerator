@@ -131,6 +131,7 @@
     <ClInclude Include="DFS.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Kruskals.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="RecursiveBacktracker.h" />
     <ClInclude Include="Screens.h" />

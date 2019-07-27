@@ -30,6 +30,11 @@ private:
 	sf::Text solveMenu[NUM_SOLUTION_ALG];	// hold second menu screen options
 };
 
+
+
+
+
+
 	// Menu.cpp --------------------------------------------------------------------------------------------------
 
 	Menu::Menu(float width, float height) 

@@ -2,20 +2,7 @@
 #define SCREENS_H
 #pragma once
 
-/////////////////
-///even indices should be maze generating screens,
-///odd indices should be maze solving screens
-///menu should be index 0
-////////////////
 
-enum ScreenEnum
-{
-	MENU_SCREEN = 0,
-	TEST_GRID_SCREEN = 1,
-	RECURSIVE_BACKTRACKER_SCREEN = 2,
-	DFS_SCREEN = 3,
-	KRUSKALS_SCREEN = 4,
-};
 
 //Basic Screen Class
 #include "BasicScreen.h"
@@ -27,5 +14,6 @@ enum ScreenEnum
 #include "DFS.h"
 #include "Kruskals.h"
 #include "Menu.h"
+#include "MainMenu.h"
 
 #endif // SCREENS_H

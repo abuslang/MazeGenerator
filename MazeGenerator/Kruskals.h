@@ -28,7 +28,6 @@ private:
 	};
 
 public:
-	Kruskals();
 	~Kruskals();
 
 	int Run(sf::RenderWindow &window, Grid &grid);
@@ -125,13 +124,7 @@ std::vector<std::tuple<int, int, int>>  Kruskals::DisjointSet::copy()
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-Kruskals::Kruskals() {}
-
 Kruskals::~Kruskals() {}
-
-
-
-
 
 int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 {
@@ -152,8 +145,22 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 	//make a vector of cells that we will be picking from
 	std::vector<std::tuple<int, int, int>> cells = disjointSet.copy();
 
+	bool paused = false;
+	int r = (rand() % 256);
+	int g = (rand() % 256);
+	int b = (rand() % 256);
+	sf::Text pausedPrompt;
+
+	pausedPrompt.setFont(font);
+	pausedPrompt.setString("!PAUSED!");
+	pausedPrompt.setCharacterSize(40);
+	pausedPrompt.setOrigin(pausedPrompt.getLocalBounds().width / 2, pausedPrompt.getLocalBounds().height / 2);
+	pausedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+
+
 	while (Running)
 	{
+		window.clear();
 
 		while (window.pollEvent(event))
 		{
@@ -163,93 +170,104 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 			{
 				if (event.key.code == sf::Keyboard::Escape)
 					return (0);
+				if (event.key.code == sf::Keyboard::Space)
+					paused = !paused;
 			}
 		}
 
 
-		if (wallsDown < (grid.getNumRows() * grid.getNumCols()) - 1)
+		if (!paused)
 		{
-			std::cout << "Kruskals is generating		\r";
-			std::vector<int> neighbours;
-			int randIdx = rand() % cells.size();
-			std::tuple<int, int, int> randCell = cells[randIdx];
-			auto offset = [&](int row, int col)
+			if (wallsDown < (grid.getNumRows() * grid.getNumCols()) - 1)
 			{
-				return (std::get<0>(randCell)+ row) * grid.getNumCols() + (std::get<1>(randCell) + col);
-			};
-
-
-			//now check for neighbors in N, S, E and W directions
-
-			//if the cell is anywhere BUT row 0, then the cell has NORTH neighbor
-			if (std::get<0>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_N) == 0x0)
-				if(disjointSet.find(offset(0, 0)) != disjointSet.find(offset(-1, 0)))
-					neighbours.push_back(0);
-
-			//if the cell is anywhere but the last column, then the cell has EAST neighbor
-			if (std::get<1>(randCell) < (grid.getNumCols() - 1) && (grid.getState(offset(0, 0)) & PATH_E) == 0x0)
-				if(disjointSet.find(offset(0, 0)) != disjointSet.find(offset(0, 1)))
-					neighbours.push_back(1);
-
-			//if the cell is anywhere but the bottom row, then it has SOUTH neighbor
-			if (std::get<0>(randCell) < (grid.getNumRows() - 1) && (grid.getState(offset(0, 0)) & PATH_S) == 0x0)
-				if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(1, 0)))
-					neighbours.push_back(2);
-
-			//if the cell is anywhere but the 1st column, then it has WEST neighbor
-			if (std::get<1>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_W) == 0x0)
-				if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(0, -1)))
-					neighbours.push_back(3);
-
-			if (!neighbours.empty())
-			{
-				//pick random edge and break down the wall
-				int edge = neighbours[rand() % neighbours.size()];
-				switch (edge)
+				std::cout << "Kruskals is generating		\r";
+				std::vector<int> neighbours;
+				int randIdx = rand() % cells.size();
+				std::tuple<int, int, int> randCell = cells[randIdx];
+				auto offset = [&](int row, int col)
 				{
-				case 0:	//NORTH
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_N | GEN_VISITED);
-					grid.setState(offset(-1, 0), grid.getState(offset(-1, 0)) | PATH_S | GEN_VISITED);
-					disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(-1, 0)));
-					break;
+					return (std::get<0>(randCell) + row) * grid.getNumCols() + (std::get<1>(randCell) + col);
+				};
 
-				case 1:	//EAST
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_E | GEN_VISITED);
-					grid.setState(offset(0, 1), grid.getState(offset(0, 1)) | PATH_W | GEN_VISITED);
-					disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(0, 1)));
-					break;
 
-				case 2:	//SOUTH
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_S | GEN_VISITED);
-					grid.setState(offset(1, 0), grid.getState(offset(1, 0)) | PATH_N | GEN_VISITED);
-					disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(1, 0)));
-					break;
+				//now check for neighbors in N, S, E and W directions
 
-				case 3:	//WEST
-					grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_W | GEN_VISITED);
-					grid.setState(offset(0, -1), grid.getState(offset(0, -1)) | PATH_E | GEN_VISITED);
-					disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(0, -1)));
-					break;
+				//if the cell is anywhere BUT row 0, then the cell has NORTH neighbor
+				if (std::get<0>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_N) == 0x0)
+					if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(-1, 0)))
+						neighbours.push_back(0);
+
+				//if the cell is anywhere but the last column, then the cell has EAST neighbor
+				if (std::get<1>(randCell) < (grid.getNumCols() - 1) && (grid.getState(offset(0, 0)) & PATH_E) == 0x0)
+					if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(0, 1)))
+						neighbours.push_back(1);
+
+				//if the cell is anywhere but the bottom row, then it has SOUTH neighbor
+				if (std::get<0>(randCell) < (grid.getNumRows() - 1) && (grid.getState(offset(0, 0)) & PATH_S) == 0x0)
+					if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(1, 0)))
+						neighbours.push_back(2);
+
+				//if the cell is anywhere but the 1st column, then it has WEST neighbor
+				if (std::get<1>(randCell) > 0 && (grid.getState(offset(0, 0)) & PATH_W) == 0x0)
+					if (disjointSet.find(offset(0, 0)) != disjointSet.find(offset(0, -1)))
+						neighbours.push_back(3);
+
+				if (!neighbours.empty())
+				{
+					//pick random edge and break down the wall
+					int edge = neighbours[rand() % neighbours.size()];
+					switch (edge)
+					{
+					case 0:	//NORTH
+						grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_N | GEN_VISITED);
+						grid.setState(offset(-1, 0), grid.getState(offset(-1, 0)) | PATH_S | GEN_VISITED);
+						disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(-1, 0)));
+						break;
+
+					case 1:	//EAST
+						grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_E | GEN_VISITED);
+						grid.setState(offset(0, 1), grid.getState(offset(0, 1)) | PATH_W | GEN_VISITED);
+						disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(0, 1)));
+						break;
+
+					case 2:	//SOUTH
+						grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_S | GEN_VISITED);
+						grid.setState(offset(1, 0), grid.getState(offset(1, 0)) | PATH_N | GEN_VISITED);
+						disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(1, 0)));
+						break;
+
+					case 3:	//WEST
+						grid.setState(offset(0, 0), grid.getState(offset(0, 0)) | PATH_W | GEN_VISITED);
+						grid.setState(offset(0, -1), grid.getState(offset(0, -1)) | PATH_E | GEN_VISITED);
+						disjointSet.Union(disjointSet.find(offset(0, 0)), disjointSet.find(offset(0, -1)));
+						break;
+					}
+					wallsDown++;
 				}
-				wallsDown++;
-			}
+				else
+				{
+					//remove the cell from cell list
+					cells.erase(cells.begin() + randIdx);
+					cellsRemoved++;
+
+				}
+
+
+
+			}// end algo if
 			else
 			{
-				//remove the cell from cell list
-				cells.erase(cells.begin() + randIdx);
-				cellsRemoved++;
-
+				std::cout << "Kruskals is done			\r";
+				grid.setMazeGenFlag(true);
 			}
-
-
-
-		}// end algo if
+		}//end if paused
 		else
 		{
-			std::cout << "Kruskals is done			\r";
+			pausedPrompt.setFillColor(sf::Color(r*std::sin(time(NULL)), g*std::sin(time(NULL)), b*std::sin(time(NULL))));
+			window.draw(pausedPrompt);
 		}
+		
 
-		window.clear();
 		window.draw(grid);
 		window.display();
 	}
