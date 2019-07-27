@@ -5,20 +5,8 @@
 	This program demonstrates various Maze generation and solution algorithms with
 	the use of the SFML library for visuals.
 
-
-	Brainstorming:
 	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
 
-	create a grid of n x m cells, and initialize all of them to be unconnected.
-	prompt the user for a maze generation routine from a list. just implement 1 for now.
-	prompt the user for a path finding routine that finds the path from entrance to exit.
-
-	each of these "routines" can be implemented as a screen, check the link above
-
-	pass the window into the chosen Maze Generating Routine, and have it update each frame.
-	after its finsished, prompt user to select entrance and exit for the maze.
-	then pass the window or grid in to the chosen pathfinding routine and have it update each frame.
-	finally, crash and burn the computer.
 */
 
 #include "SFML/Graphics.hpp"
@@ -32,8 +20,6 @@ int main()
 	std::vector<BasicScreen*> Screens(100);	//vector of available screens, can switch from screen to screen by returning its index			
 	
 	//initializing the screens
-	Test testScreen;
-	TestGrid testGrid;
 	RecursiveBacktracker backtracker;
 	DFS dfs;
 	Kruskals kruskals;

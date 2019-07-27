@@ -1,3 +1,7 @@
+/*
+
+*/
+
 #include "RecursiveBacktracker.h"
 #include "Cell.h"
 #include "Grid.h"
@@ -5,9 +9,7 @@
 #include <iostream>
 
 
-RecursiveBacktracker::~RecursiveBacktracker()
-{
-}
+RecursiveBacktracker::~RecursiveBacktracker(){}
 
 int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 {

@@ -1,3 +1,6 @@
+/*
+
+*/
 #include "DFS.h"
 #include<stack>
 #include "Grid.h"
@@ -9,7 +12,7 @@ DFS::~DFS() {}
 int DFS::Run(sf::RenderWindow &window, Grid &grid)
 {
 	window.setTitle("Depth First Search Screen");
-	srand(time(NULL));
+	srand((unsigned int)time(NULL));
 	grid.resetSolution();
 
 	bool Running = true;
@@ -44,14 +47,14 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 	pausedPrompt.setString("!PAUSED!");
 	pausedPrompt.setCharacterSize(60);
 	pausedPrompt.setOrigin(pausedPrompt.getLocalBounds().width / 2, pausedPrompt.getLocalBounds().height / 2);
-	pausedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	pausedPrompt.setPosition((float)window.getSize().x / 2, (float)window.getSize().y / 2);
 
 	sf::Text finishedPrompt;
 	finishedPrompt.setFont(font);
 	finishedPrompt.setString("Press Return\nTo Continue");
 	finishedPrompt.setCharacterSize(60);
 	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
-	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
+	finishedPrompt.setPosition((float)window.getSize().x / 2, (float)window.getSize().y / 2);
 
 	while (Running)
 	{
