@@ -5,17 +5,33 @@
 */
 
 
-#ifndef BASIC_SCREEN_H
-#define BASIC_SCREEN_H
 #pragma once
 #include "SFML/Graphics.hpp"
+
+/////////////////
+///odd indices should be maze generating screens,
+///even indices should be maze solving screens
+///menu should be index 0
+////////////////
+enum ScreenEnum
+{
+	RECURSIVE_BACKTRACKER_SCREEN,	//0
+	DFS_SCREEN,						//1
+	KRUSKALS_SCREEN,				//2
+	//BFS_SCREEN,					//3
+	//ANOTHER_GENERATION_ALGO		//4
+	//ETC
+	LAST_ENUM,
+	MENU_SCREEN,
+};
 
 class Grid;
 
 class BasicScreen
 {
+private:
 public:
+	sf::Font font;
+	BasicScreen();
 	virtual int Run(sf::RenderWindow &window, Grid &grid) = 0;
 };
-
-#endif //BASIC_SCREEN_H

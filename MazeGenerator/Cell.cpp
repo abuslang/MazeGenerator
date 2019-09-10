@@ -1,9 +1,17 @@
 #include "Cell.h"
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master
 Cell::Cell() {}
 
 Cell::Cell(int row, int col, int s) : rowIdx(row), colIdx(col), s(s)
 {
+<<<<<<< HEAD
+=======
+	int thickness = 7;
+>>>>>>> upstream/master
 	//set the positions and default values for the cell attributes
 	state = (int)0x00000;
 
@@ -11,6 +19,7 @@ Cell::Cell(int row, int col, int s) : rowIdx(row), colIdx(col), s(s)
 	body.setFillColor(sf::Color::Blue);
 	body.setPosition(col * s, row * s);
 
+<<<<<<< HEAD
 	top.setSize(sf::Vector2f(s, s / 5));
 	top.setFillColor(sf::Color::Black);
 	top.setPosition(col * s, row * s);
@@ -26,6 +35,23 @@ Cell::Cell(int row, int col, int s) : rowIdx(row), colIdx(col), s(s)
 	right.setSize(sf::Vector2f(s / 5, s));
 	right.setFillColor(sf::Color::Black);
 	right.setPosition((col * s + s) - (s / 5), row * s);
+=======
+	top.setSize(sf::Vector2f(s, s / thickness));
+	top.setFillColor(sf::Color::Black);
+	top.setPosition(col * s, row * s);
+
+	bottom.setSize(sf::Vector2f(s, s / thickness));
+	bottom.setFillColor(sf::Color::Black);
+	bottom.setPosition(col * s, (row * s + s) - (s / thickness));
+
+	left.setSize(sf::Vector2f(s / thickness, s));
+	left.setFillColor(sf::Color::Black);
+	left.setPosition(col * s, row * s);
+
+	right.setSize(sf::Vector2f(s / thickness, s));
+	right.setFillColor(sf::Color::Black);
+	right.setPosition((col * s + s) - (s / thickness), row * s);
+>>>>>>> upstream/master
 }//end constructor
 
 void Cell::draw(sf::RenderTarget &target, sf::RenderStates states) const
@@ -96,3 +122,7 @@ void Cell::setState(int s)
 		bottom.setFillColor(sf::Color::Black);
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> upstream/master

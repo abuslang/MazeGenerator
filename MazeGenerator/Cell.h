@@ -1,7 +1,4 @@
-#ifndef CELL_H
-#define CELL_H
 #pragma once
-
 #include "SFML/Graphics.hpp"
 
 enum
@@ -44,11 +41,13 @@ public:
 	//mutator methods
 	void setState(int s);
 	void setColor(sf::Color color);
-
 };
+<<<<<<< HEAD
 
 
 
 
 #endif
+=======
+>>>>>>> upstream/master
 

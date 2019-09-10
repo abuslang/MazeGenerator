@@ -123,11 +123,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="BasicScreen.cpp" />
+>>>>>>> upstream/master
     <ClCompile Include="Cell.cpp" />
     <ClCompile Include="DFS.cpp" />
     <ClCompile Include="Grid.cpp" />
     <ClCompile Include="Kruskals.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="Menu.cpp" />
+=======
+    <ClCompile Include="MainMenu.cpp" />
+>>>>>>> upstream/master
     <ClCompile Include="RecursiveBacktracker.cpp" />
     <ClCompile Include="src.cpp" />
   </ItemGroup>
@@ -137,11 +145,9 @@
     <ClInclude Include="DFS.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Kruskals.h" />
-    <ClInclude Include="Menu.h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="RecursiveBacktracker.h" />
     <ClInclude Include="Screens.h" />
-    <ClInclude Include="test.h" />
-    <ClInclude Include="TestGrid.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

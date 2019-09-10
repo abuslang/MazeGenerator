@@ -1,9 +1,21 @@
 #include "Grid.h"
+<<<<<<< HEAD
+=======
+#include <vector>
+#include "Cell.h"
+
+>>>>>>> upstream/master
 
 Grid::Grid(int m, int n, int s) : cellArray(m*n), numRows(m), numCols(n)
 {
 	//create a m x n grid with empty cells of size s x s
+<<<<<<< HEAD
 	hasBeenGenerated = false;
+=======
+	mazeGenerated = false;
+	mazeSolved = false;
+
+>>>>>>> upstream/master
 	for (int row = 0; row < m; row++)
 	{
 		for (int col = 0; col < n; col++)
@@ -50,6 +62,17 @@ int Grid::getState(int idx)
 {
 	return cellArray[idx].getState();
 }
+<<<<<<< HEAD
+=======
+bool Grid::getMazeGenFlag()
+{
+	return mazeGenerated;
+}
+bool Grid::getMazeSolFlag()
+{
+	return mazeSolved;
+}
+>>>>>>> upstream/master
 
 //Mutator Methods
 void Grid::setState(int row, int col, int state)
@@ -72,9 +95,27 @@ void Grid::setColor(int row, int col, sf::Color color)
 	cellArray[row*numCols + col].setColor(color);
 }
 
+<<<<<<< HEAD
 void Grid::resetGeneration()
 {
 	hasBeenGenerated = false;
+=======
+void Grid::setMazeGenFlag(bool flag)
+{
+	mazeGenerated = flag;
+}
+
+void Grid::setMazeSolFlag(bool flag)
+{
+	mazeSolved = flag;
+}
+
+void Grid::resetGeneration()
+{
+	mazeGenerated = false;
+	mazeSolved = false;
+
+>>>>>>> upstream/master
 	for (int row = 0; row < numRows; row++)
 	{
 		for (int col = 0; col < numCols; col++)
@@ -86,6 +127,10 @@ void Grid::resetGeneration()
 
 void Grid::resetSolution()
 {
+<<<<<<< HEAD
+=======
+	mazeSolved = false;
+>>>>>>> upstream/master
 	for (int row = 0; row < numRows; row++)
 	{
 		for (int col = 0; col < numCols; col++)

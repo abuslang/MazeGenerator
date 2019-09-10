@@ -1,23 +1,14 @@
-#ifndef KRUSKALS_H
-#define KRUSKALS_H
 #pragma once
 
 #include "BasicScreen.h"
-#include "Grid.h"
-#include <iostream>
 
+class Grid;
 
 class Kruskals : public BasicScreen
 {
 private:
-	int numRows;
-	int numCols;
-	std::vector<std::tuple<int, int, int>> disjointSet;
-	void DJSinit(int numRows, int numCols);
-	int DJSfind(int row, int col);
-	int DJSfind(int idx);
-	void DJSunion(int root1, int root2);
 
+<<<<<<< HEAD
 public:
 	Kruskals();
 	~Kruskals();
@@ -28,8 +19,26 @@ public:
 
 
 
+=======
+	struct DisjointSet
+	{
+	private:
+		int numRows;
+		int numCols;
+		std::vector<std::tuple<int, int, int>> set;
+	public:
+>>>>>>> upstream/master
 
+		DisjointSet(int rows, int cols);
+		~DisjointSet();
 
+		int find(int idx);
+		void Union(int root1, int root2);
+		std::vector<std::tuple<int, int, int>> copy();
+	};
 
+public:
+	~Kruskals();
 
-#endif
+	int Run(sf::RenderWindow &window, Grid &grid);
+};
