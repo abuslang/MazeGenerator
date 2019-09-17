@@ -1,3 +1,9 @@
+/*
+Desc:
+	This is a Grid class that holds an array of Cell objects. The class also has methods for manipulating
+	the array of Cells.
+*/
+
 #include "Grid.h"
 #include <vector>
 #include "Cell.h"
@@ -18,11 +24,13 @@ Grid::Grid(int m, int n, int s) : cellArray(m*n), numRows(m), numCols(n)
 	}
 }//end constructor
 
+
 Grid::~Grid()
 {
 	cellArray.clear();
 	std::vector<Cell>().swap(cellArray);
 }//end destructor
+
 
 void Grid::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {

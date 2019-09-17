@@ -1,5 +1,8 @@
 /*
-
+	Desc:
+	The Recursive Backtracker selects a random unvisited neighboring cells and visits it. The algo will continue 
+	visiting unvisited neighbors until it runs out of unvisited neighboring cells. There the algo wil backtrack to a cell
+	which has an unvisited neighboring cell and continues. The algo continues until there are no more unvisited cells.
 */
 
 #include "RecursiveBacktracker.h"
@@ -29,6 +32,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 	grid.setState(row, col, GEN_VISITED);
 	visitedCount = 1;
 
+
 	bool paused = false;
 	sf::Text pausedPrompt;
 
@@ -45,6 +49,8 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
 	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
+
+	//lambda function that helps out finding location of a cell relative to a specified cell
 	auto offset = [&](int row, int col)
 	{
 		return (stack.top().first + row) * grid.getNumCols() + (stack.top().second + col);
@@ -76,7 +82,7 @@ int RecursiveBacktracker::Run(sf::RenderWindow &window, Grid &grid)
 			}
 
 			//the algo is in this if
-			//it's inside an if b/c we want to se the maze generate in realtime
+			//it's inside an if b/c we want to see the maze generate frame by frame
 			if (visitedCount < (grid.getNumCols() * grid.getNumRows()))
 			{
 				std::cout << "Recursive Backtracker is generating	\r";
