@@ -1,12 +1,9 @@
 /*
-	Contributors: Saad Bhatti, Abdusammad Quadri
+	Authors: Saad Bhatti, Abdusammad Quadri
 	
 	Description: 
-	This program demonstrates various Maze generation and solution algorithms with
-	the use of the SFML library for visuals.
-
-	info about managing screens: https://github.com/SFML/SFML/wiki/Tutorial:-Manage-different-Screens
-
+	This program demonstrates various Maze generation and solution algorithms. The algorithms are displayed
+	using the SFML library.
 */
 
 #include "SFML/Graphics.hpp"
@@ -31,15 +28,14 @@ int main()
 	Screens[KRUSKALS_SCREEN] = &kruskals;
 
 
-
-	int m = 10;				//get these from user
-	int n = 10;
+	int m = 12;				
+	int n = 12;
 
 	int screenSize = (window.getSize().x < window.getSize().y) ? window.getSize().x : window.getSize().y;
 	int gridSize = (m > n) ? m: n;
 
 	Grid *maze;
-	maze = new Grid(m, n, screenSize/gridSize); //instantiate a 20 x 20 grid with Cell sizes of 50 x 50
+	maze = new Grid(m, n, screenSize/gridSize);
 	
 
 	int screen = MENU_SCREEN;

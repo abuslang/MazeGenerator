@@ -1,13 +1,20 @@
+/*
+Desc:
+This is a modified Kruskal's Algorithm. Instead of choosing an edge with the lowest weight, it chooses a random edge.
+When the algorithm chooses an edge, it checks performs a find on a disjoint set which holds the cells. If the parents of
+the nodes in the disjoint set are not equal, it then performs a union. If the parents of the nodes are equal, then the edge is discarded
+from the set so it is not picked again.
+*/
+
 #include "Kruskals.h"
 #include <iostream>
 #include "Cell.h"
 #include "Grid.h"
 
 
-
-
 Kruskals::DisjointSet::DisjointSet(int rows, int cols) : numRows(rows), numCols(cols)
 {
+	//creates the disjoint set
 	set.resize(numRows*numCols);
 
 	for (int row = 0; row < numRows; row++)
@@ -19,13 +26,16 @@ Kruskals::DisjointSet::DisjointSet(int rows, int cols) : numRows(rows), numCols(
 	}
 }//end constructor
 
+
 Kruskals::DisjointSet::~DisjointSet()
 {
 	std::vector<std::tuple<int, int, int>>().swap(set);
 }//end destructor
 
+
 int Kruskals::DisjointSet::find(int idx)
 {
+	//recursively searches for a node's parent
 	if (std::get<2>(set[idx]) <= -1)
 	{
 		return idx;
@@ -35,6 +45,7 @@ int Kruskals::DisjointSet::find(int idx)
 		return find(std::get<2>(set[idx]));
 	}
 }//end find
+
 
 void Kruskals::DisjointSet::Union(int root1, int root2)
 {
@@ -94,6 +105,8 @@ std::vector<std::tuple<int, int, int>>  Kruskals::DisjointSet::copy()
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
+
+
 Kruskals::~Kruskals() {}
 
 int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
@@ -131,6 +144,7 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 	finishedPrompt.setOrigin(finishedPrompt.getLocalBounds().width / 2, finishedPrompt.getLocalBounds().height / 2);
 	finishedPrompt.setPosition(window.getSize().x / 2, window.getSize().y / 2);
 
+
 	while (Running)
 	{
 
@@ -156,6 +170,7 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 				std::vector<int> neighbours;
 				int randIdx = rand() % cells.size();
 				std::tuple<int, int, int> randCell = cells[randIdx];
+
 				auto offset = [&](int row, int col)
 				{
 					return (std::get<0>(randCell) + row) * grid.getNumCols() + (std::get<1>(randCell) + col);
@@ -251,5 +266,4 @@ int Kruskals::Run(sf::RenderWindow &window, Grid &grid)
 	}
 
 	return -1;
-
 }//end run
