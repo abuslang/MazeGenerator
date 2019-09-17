@@ -32,8 +32,8 @@ int main()
 
 
 
-	int m = 20;				//get these from user
-	int n = 20;
+	int m = 10;				//get these from user
+	int n = 10;
 
 	int screenSize = (window.getSize().x < window.getSize().y) ? window.getSize().x : window.getSize().y;
 	int gridSize = (m > n) ? m: n;
