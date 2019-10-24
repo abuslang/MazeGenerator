@@ -1,7 +1,10 @@
-#include "Cell.h"
+/*
+Desc:
+	This is the Cell class. It has the usual getter and setter methods, and also has methods for drawing the cell onto the screen.
+	The Cell class also has a state attribute which can be used to keep track of the neighbors it has.
+*/
 
-<<<<<<< HEAD
-=======
+#include "Cell.h"
 
 >>>>>>> upstream/master
 Cell::Cell() {}
@@ -125,4 +128,3 @@ void Cell::setState(int s)
 <<<<<<< HEAD
 =======
 
->>>>>>> upstream/master

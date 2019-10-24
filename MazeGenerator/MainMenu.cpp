@@ -1,3 +1,9 @@
+/*
+Desc:
+This is a basic main menu that lets the user choose the Maze Generation and Solution algorithms.
+The menu looks at the status of the Maze (whether it has been generated or not) to decide what to menu to display.
+*/
+
 #include "MainMenu.h"
 #include <iostream>
 #include "Grid.h"
@@ -12,7 +18,6 @@ MainMenu::MainMenu()
 	nameArr.push_back("Recursive Backtracker");
 	nameArr.push_back("Depth First Search");
 	nameArr.push_back("Kruskal's");
-	//nameArr.push_back("BFS");
 
 	title.setFont(font);
 	title.setFillColor(sf::Color::White);
@@ -26,6 +31,7 @@ MainMenu::MainMenu()
 
 MainMenu::~MainMenu()
 {
+	//free the vector memory
 	std::vector<std::string>().swap(nameArr);
 }
 
@@ -98,6 +104,8 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 			}//end keyPressed event
 		}
 
+
+
 		if (!grid.getMazeGenFlag() || forceGen)
 		{
 			//if maze has not been generated, then prompt the user to select a generation algo
@@ -126,6 +134,8 @@ int MainMenu::Run(sf::RenderWindow &window, Grid &grid)
 	return (-1);
 
 }//end run
+
+
 
 void MainMenu::drawGenScreen(sf::RenderWindow &window)
 {

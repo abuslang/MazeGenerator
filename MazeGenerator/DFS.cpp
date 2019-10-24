@@ -4,8 +4,14 @@
 DFS::DFS() {}
 =======
 /*
-
+Desc:
+	This is a modified Depth First Search algorithm for searching for a path from Cell to Cell.
+	A starting Cell is randomly set, and from there the algo finds a path to another randomly chosen Cell.
+	From the starting Cell, the algo finds chooses a random neighbor, puts it onto a stack and calls DFS on that neighbor.
+	If the algo reaches a Cell without any neighbors, it then pops the stack until a Cell with neighbors is found. The process
+	continues until the exit Cell is reached.
 */
+
 #include "DFS.h"
 #include<stack>
 #include "Grid.h"
@@ -42,19 +48,26 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 >>>>>>> upstream/master
 	};
 
+	//randomly chosen starting cell
 	int row = rand() % (grid.getNumRows());
 	int col = rand() % (grid.getNumCols());
 
-
+	//push the strting cell onto the stack
 	std::pair<int, int> start = std::make_pair(row, col);
 <<<<<<< HEAD
 	stack.push(start);
 =======
 	stk.push(start);
+<<<<<<< HEAD
 >>>>>>> upstream/master
+=======
+
+>>>>>>> a35f1556c5fb1ffecc1f355fd7eb7211a0d777c4
 	grid.setState(row, col, grid.getState(offset(0, 0)) | SOL_VISITED);
 	grid.setColor(row, col, sf::Color::Green);
 
+
+	//randomly chosen ending cell
 	row = rand() % (grid.getNumRows());
 	col = rand() % (grid.getNumCols());
 
@@ -85,8 +98,11 @@ int DFS::Run(sf::RenderWindow &window, Grid &grid)
 	while (Running)
 	{
 
+<<<<<<< HEAD
 
 >>>>>>> upstream/master
+=======
+>>>>>>> a35f1556c5fb1ffecc1f355fd7eb7211a0d777c4
 		sf::Event event;
 		while (window.pollEvent(event))
 		{
